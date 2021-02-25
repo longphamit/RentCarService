@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/RentCarService">
+    <Resource
+        name="RentCar"
+        auth="Container"
+        type="javax.sql.DataSource"
+        driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
+        url="jdbc:sqlserver://localhost:1433;databaseName=RentCar"
+        username="sa" password="Goboi123"
+    />
+
+</Context>
