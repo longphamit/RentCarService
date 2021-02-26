@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -45,8 +46,17 @@ public class UpdateFromCartServlet extends HttpServlet {
             String id = request.getParameter(FieldConstant.FORM_PRODUCT_ID);
             String toDate = request.getParameter(FieldConstant.FORM_TO_DATE);
             String fromDate = request.getParameter(FieldConstant.FORM_FROM_DATE);
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date dFromDate = sdf.parse(fromDate);
+            Date dToDate=sdf.parse(toDate);
+            fromDate = output.format(dFromDate);
+            toDate=output.format(dToDate);
             String oldToDate = request.getParameter("oldToDate");
             String oldFromDate = request.getParameter("oldFromDate");
+
+            
             MessageDTO messageDTO = new MessageDTO();
             HttpSession session = request.getSession();
             CartDTO cartDTO = (CartDTO) session.getAttribute(FieldConstant.CART_SESSION);
@@ -54,10 +64,10 @@ public class UpdateFromCartServlet extends HttpServlet {
             List<ProductDTO> result= new ArrayList<>();
             for (ProductDTO productDTO : cartDTO.getCart().get(id)) {
                 
-                if (productDTO.getToDate().getTime() == new SimpleDateFormat("yyyy-MM-dd").parse(oldToDate).getTime()
-                        && productDTO.getFromDate().getTime()==new SimpleDateFormat("yyyy-MM-dd").parse(oldFromDate).getTime() ) {
-                    productDTO.setFromDate(new SimpleDateFormat("yyyy-MM-dd").parse(fromDate));
-                    productDTO.setToDate(new SimpleDateFormat("yyyy-MM-dd").parse(toDate));
+                if (productDTO.getToDate().getTime() == new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(oldToDate).getTime()
+                        && productDTO.getFromDate().getTime()==new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(oldFromDate).getTime() ) {
+                    productDTO.setFromDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(fromDate));
+                    productDTO.setToDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(toDate));
                     result.add(productDTO);
                 }
                 else{

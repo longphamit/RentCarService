@@ -14,6 +14,7 @@ import com.longpc.util.LinkConstant;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,11 +47,19 @@ public class OrderServlet extends HttpServlet {
             String id = request.getParameter(FieldConstant.FORM_PRODUCT_ID);
             String toDate = request.getParameter(FieldConstant.FORM_TO_DATE);
             String fromDate = request.getParameter(FieldConstant.FORM_FROM_DATE);
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date dFromDate = sdf.parse(fromDate);
+            Date dToDate=sdf.parse(toDate);
+            fromDate = output.format(dFromDate);
+            toDate=output.format(dToDate);
+            
             MessageDTO messageDTO = new MessageDTO();
             HttpSession session = request.getSession();
             ProductDTO productDTO = productDAO.findById(id);
-            productDTO.setFromDate(new SimpleDateFormat("yyyy-MM-dd").parse(fromDate));
-            productDTO.setToDate(new SimpleDateFormat("yyyy-MM-dd").parse(toDate));
+            productDTO.setFromDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(fromDate));
+            productDTO.setToDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(toDate));
             productDTO.setId(id);
             boolean check = false;
             if (null == session.getAttribute(FieldConstant.CART_SESSION)) {

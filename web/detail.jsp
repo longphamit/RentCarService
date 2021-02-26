@@ -98,11 +98,11 @@
                             <input type="hidden" name="${initParam['FORM_PRODUCT_ID']}" value="${item.id}"/>
                             <div class="mb-3">
                                 <label for="modalFromDate" class="col-form-label">Từ ngày: </label><br/>
-                                <input name="${initParam['FORM_FROM_DATE']}" id="modalFromDate" onkeydown="return false" type="date"/><br/>
+                                <input name="${initParam['FORM_FROM_DATE']}" id="modalFromDate" onkeydown="return false" type="datetime-local"/><br/>
                             </div>
                             <div class="mb-3">
                                 <label for="modalToDate" class="col-form-label">Đến ngày: </label><br/>
-                                <input name="${initParam['FORM_TO_DATE']}" id="modalToDate" onkeydown="return false" type="date"/><br/>
+                                <input name="${initParam['FORM_TO_DATE']}" id="modalToDate" onkeydown="return false" type="datetime-local"/><br/>
                             </div>
 
                         </div>

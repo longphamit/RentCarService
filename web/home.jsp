@@ -41,6 +41,8 @@
         <c:remove var="message" scope="session" /> 
     </c:if>
     <div class="container">
+
+
         <div class="row">
             <div class="row container" >
                 <c:forEach items="${requestScope.listProducts}" var="item">
@@ -79,11 +81,11 @@
                                         <input type="hidden" name="${initParam['FORM_PRODUCT_ID']}" value="${item.key}"/>
                                         <div class="mb-3">
                                             <label for="modalFromDate" class="col-form-label">Từ ngày: </label><br/>
-                                            <input name="${initParam['FORM_FROM_DATE']}" id="modalFromDate-${item.key}" onkeydown="return false" type="date"/><br/>
+                                            <input name="${initParam['FORM_FROM_DATE']}" id="modalFromDate-${item.key}" onkeydown="return false" type="datetime-local"/><br/>
                                         </div>
                                         <div class="mb-3">
                                             <label for="modalToDate" class="col-form-label">Đến ngày: </label><br/>
-                                            <input name="${initParam['FORM_TO_DATE']}" id="modalToDate-${item.key}" onkeydown="return false" type="date"/><br/>
+                                            <input name="${initParam['FORM_TO_DATE']}" id="modalToDate-${item.key}" onkeydown="return false" type="datetime-local"/><br/>
                                         </div>
 
                                     </div>
@@ -98,7 +100,18 @@
                 </c:forEach>
 
             </div>
+            <div style="margin-top: 5px;margin-left:10px">
+                <c:choose>
+                    <c:when test="${param.page eq null}">
+                        <c:out value="Trang 1/${sessionScope.maxPage}"></c:out>
+                    </c:when>
+                    <c:when test="${param.page ne null}">
+                        <c:out value="Trang ${param.page}/${sessionScope.maxPage}"></c:out>
+                    </c:when>
+                </c:choose>
+            </div>
             <nav aria-label="Page navigation example" class="d-flex justify-content-center" style="margin-top: 50px">
+
                 <ul class="pagination">
                     <c:forEach begin="${sessionScope.minPage}" end="${sessionScope.maxPage}" var="i" >
                         <c:url value="/?page=${i}" var="url">
@@ -110,6 +123,7 @@
                         <li class="page-item"><a class="page-link" href="${pageScope.url}">${i}</a></li>
                         </c:forEach>
                 </ul>
+
             </nav>
         </div>
     </div>
@@ -170,7 +184,7 @@
                                                     success: function (data, textStatus, jqXHR) {
                                                         $("#searchName").autocomplete({
                                                             source: data,
-                                                            minLength:1,
+                                                            minLength: 1,
                                                         });
                                                     }
                                                 })

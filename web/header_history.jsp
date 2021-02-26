@@ -96,10 +96,20 @@
                 </ul>
                 <div>
                     <form onsubmit="return checkSearch()" action="History" method="GET" class="d-flex">
-                        <a href="Main" class="btn btn-success" style="color: #ffffff;width: 300px;height: 50px;margin-right: 20px;margin-bottom: 30px">Trang chủ</a> 
-                        <input id="searchNameInForm" name="${initParam['SEARCH_NAME']}" class="form-control me-2" value="${param.searchName}"  type="search" placeholder="Name" aria-label="Search">
-                        <input id="searchCreateDateInForm" name="searchCreateDate" class="form-control me-2" value="${param.searchCreateDate}"  type="date" onkeydown="return false"  placeholder="Search" aria-label="Search">
-                        <button class="btn btn-info" style="color: #ffffff;width: 200px;height: 50px;margin-right: 30px;margin-left: 20px" type="submit">Search</button>
+                        <div style="margin-left: 10px;margin-top: 10px">
+                            <a href="Main" class="btn btn-success" style="color: #ffffff;width: 300px;height: 50px;margin-right: 20px;margin-bottom: 30px">Trang chủ</a>
+                        </div>
+                        <div style="width: 200px;margin-left: 10px">
+                           Tên <input id="searchNameInForm" name="${initParam['SEARCH_NAME']}" class="form-control me-2" value="${param.searchName}"  type="search" placeholder="Name" aria-label="Search">
+                        </div>
+                        <div style="width: 200px;margin-left: 10px">
+                           Ngày tạo <input id="searchCreateDateInForm" name="searchCreateDate" class="form-control me-2" value="${param.searchCreateDate}"  type="date" onkeydown="return false"  placeholder="Search" aria-label="Search">
+                        </div>
+                        
+                        <div style="margin-left: 10px;margin-top: 10px">
+                            <button class="btn btn-info" style="color: #ffffff;width: 200px;height: 50px;margin-right: 30px;margin-left: 20px" type="submit">Search</button>
+                        </div>
+                        
                     </form>
                     <a href="History" class="btn btn-warning" style="color: #ffffff;width: 200px;height: 50px">Tất cả</a>
                     <a href="GetOrderRemoved" class="btn btn-warning" style="color: #ffffff;width: 200px;height: 50px">Đơn hàng đã xóa</a>

@@ -15,6 +15,7 @@ import com.longpc.util.FieldConstant;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -44,6 +45,12 @@ public class AjaxServlet extends HttpServlet {
             String action = request.getParameter("action");
             String fromDate = request.getParameter("fromDate");
             String toDate = request.getParameter("toDate");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date dFromDate = sdf.parse(fromDate);
+            Date dToDate=sdf.parse(toDate);
+            fromDate = output.format(dFromDate);
+            toDate=output.format(dToDate);
             String id = request.getParameter("id");
             switch (action) {
                 case "checkOrder": {
@@ -55,10 +62,10 @@ public class AjaxServlet extends HttpServlet {
                     if (cartDTO != null) {
                         if (cartDTO.getCart().containsKey(id)) {
                             for (ProductDTO productDTO : cartDTO.getCart().get(id)) {
-                                if (productDTO.getFromDate().getTime() <= new SimpleDateFormat("yyyy-MM-dd").parse(fromDate).getTime()
-                                        && productDTO.getToDate().getTime() >= new SimpleDateFormat("yyyy-MM-dd").parse(fromDate).getTime()
-                                        || productDTO.getFromDate().getTime() <= new SimpleDateFormat("yyyy-MM-dd").parse(toDate).getTime()
-                                        && productDTO.getToDate().getTime() >= new SimpleDateFormat("yyyy-MM-dd").parse(toDate).getTime()) {
+                                if (productDTO.getFromDate().getTime() <= new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(fromDate).getTime()
+                                        && productDTO.getToDate().getTime() >= new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(fromDate).getTime()
+                                        || productDTO.getFromDate().getTime() <= new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(toDate).getTime()
+                                        && productDTO.getToDate().getTime() >= new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(toDate).getTime()) {
                                     messageDTO.setStatus(false);
                                     stringBuilder.append("Xe đã được đặt trong khoảng thời gian này");
                                     messageDTO.setContent(stringBuilder.toString());
@@ -98,7 +105,7 @@ public class AjaxServlet extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            log("Error at Ajax servlet"+e.getMessage());
+            log("Error at Ajax servlet" + e.getMessage());
         }
     }
 

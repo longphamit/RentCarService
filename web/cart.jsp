@@ -47,11 +47,11 @@
                         <tr>
                             <td>${item.name}</td>
                             <td>${item.carNumber}</td>
-                            <td><fmt:formatDate value="${item.fromDate}" pattern="yyyy/MM/dd"></fmt:formatDate></td>
-                            <td><fmt:formatDate value="${item.toDate}" pattern="yyyy/MM/dd"></fmt:formatDate></td>
+                            <td><fmt:formatDate value="${item.fromDate}" pattern="dd/MM/yyyy HH: mm"></fmt:formatDate></td>
+                            <td><fmt:formatDate value="${item.toDate}" pattern="dd/MM/yyyy HH :mm"></fmt:formatDate></td>
                             <td>${item.price} USD</td>
                             <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#OrderModal${item.id}">Sửa</button></td>
-                            <td><input style="margin-left: 19px" type="checkbox" id="vehicle1" name="checkRemove" value="${item.id}@<fmt:formatDate value="${item.fromDate}" pattern="yyyy/MM/dd"></fmt:formatDate>@<fmt:formatDate value="${item.toDate}" pattern="yyyy/MM/dd"></fmt:formatDate>"></td>
+                            <td><input style="margin-left: 19px" type="checkbox" id="vehicle1" name="checkRemove" value="${item.id}@<fmt:formatDate value="${item.fromDate}" pattern="yyyy/MM/dd HH:mm"></fmt:formatDate>@<fmt:formatDate value="${item.toDate}" pattern="yyyy/MM/dd HH:mm"></fmt:formatDate>"></td>
                             </tr>
                     </c:forEach>
                     <c:if test="${sessionScope.cartSession.getItems().size()>0}">
@@ -71,16 +71,16 @@
                                 </div>
                                 <form action="UpdateFromCart" method="POST" id="form-${item.id}">
                                     <div class="modal-body">
-                                        <input type="hidden" name="oldToDate" value="<fmt:formatDate value="${item.toDate}" pattern="yyyy-MM-dd"></fmt:formatDate>"/>
-                                        <input type="hidden" name="oldFromDate" value="<fmt:formatDate value="${item.fromDate}" pattern="yyyy-MM-dd"></fmt:formatDate>"/>
+                                        <input type="hidden" name="oldToDate" value="<fmt:formatDate value="${item.toDate}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate>"/>
+                                        <input type="hidden" name="oldFromDate" value="<fmt:formatDate value="${item.fromDate}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate>"/>
                                         <input type="hidden" name="${initParam['FORM_PRODUCT_ID']}" value="${item.id}"/>
                                         <div class="mb-3">
                                             <label for="modalFromDate" class="col-form-label">Từ ngày: </label><br/>
-                                            <input   name="${initParam['FORM_FROM_DATE']}" id="modalFromDate-${item.id}" onkeydown="return false" type="date"/><br/>
+                                            <input   name="${initParam['FORM_FROM_DATE']}" id="modalFromDate-${item.id}" onkeydown="return false" type="datetime-local"/><br/>
                                         </div>
                                         <div class="mb-3">
                                             <label for="modalToDate" class="col-form-label">Đến ngày: </label><br/>
-                                            <input name="${initParam['FORM_TO_DATE']}" id="modalToDate-${item.id}" onkeydown="return false" type="date"/><br/>
+                                            <input name="${initParam['FORM_TO_DATE']}" id="modalToDate-${item.id}" onkeydown="return false" type="datetime-local"/><br/>
                                         </div>
                                     </div>
                                     <div class="modal-footer">

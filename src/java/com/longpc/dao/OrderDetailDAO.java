@@ -91,8 +91,8 @@ public class OrderDetailDAO extends BaseDAO {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     ProductDTO productDTO= ProductFactory.convertToDTO(rs);
-                    productDTO.setFromDate(rs.getDate("from_date"));
-                    productDTO.setToDate(rs.getDate("to_date"));
+                    productDTO.setFromDate(rs.getTimestamp("from_date"));
+                    productDTO.setToDate(rs.getTimestamp("to_date"));
                     result.put(productDTO.getId(), productDTO);
                 }
                 return result;

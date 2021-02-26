@@ -58,15 +58,15 @@
                     <c:forEach items="${requestScope.listProducts}" var="item">
                         <tr>
                             <td>
-                                <img style="width: 500px;height: 300px"  src="${item.value.imageAddress}" class="card-img-top" alt="...">
+                                <img style="width: 300px;height: 200px"  src="${item.value.imageAddress}" class="card-img-top" alt="...">
                             </td>
                             <td>${item.value.name}</td>
                             <td>${item.value.carNumber}</td>
                             <td>${item.value.yearProduct}</td>
                             <td>${item.value.categoryDTO.name}</td>
                             <td>${item.value.price} USD/day</td>
-                            <td><fmt:formatDate value="${item.value.fromDate}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
-                            <td><fmt:formatDate value="${item.value.toDate}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
+                            <td><fmt:formatDate value="${item.value.fromDate}" pattern="dd-MM-yyyy HH:mm"></fmt:formatDate></td>
+                            <td><fmt:formatDate value="${item.value.toDate}" pattern="dd-MM-yyyy HH:mm"></fmt:formatDate></td>
                             <td>
                                 <form action="SendRating" method="POST">
                                     <input type="hidden" name="id" value="${item.key}"/>
