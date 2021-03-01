@@ -34,7 +34,11 @@ public class CheckDiscountServlet extends HttpServlet {
         try {
             HttpSession session=request.getSession();
             UserDTO udto=(UserDTO) session.getAttribute("USER");
-            
+            if(udto==null){
+                jSONObject.put("status",-1);
+                printWriter.write(jSONObject.toString());
+                printWriter.flush();
+            }
             double discount = discountDAO.checkDiscount(id,udto.getUserId());
             if (discount >=0) {
                 jSONObject.put("status", 1);

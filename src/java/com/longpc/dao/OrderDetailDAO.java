@@ -76,10 +76,10 @@ public class OrderDetailDAO extends BaseDAO {
 
         return null;
     }
-    public LinkedHashMap<String, ProductDTO> findByIdOrder(String id) throws Exception {
+    public List<ProductDTO> findByIdOrder(String id) throws Exception {
         StringBuilder sql = new StringBuilder();
         LinkedHashMap<Object, Integer> sqlParameterAppend = new LinkedHashMap<>();
-        LinkedHashMap<String, ProductDTO> result= new LinkedHashMap<>();
+        List<ProductDTO> result= new ArrayList<>();
         sql.append("select p.id, p.name,p.image_address,p.price,p.carNumber,p.yearProduct,p.id_categories, ca.name as category_name, od.from_date,od.to_date "
                 + "from tblProducts p, tblCategories ca ,tblOrderDetail od, tblOrders o "
                 + "where p.id_categories = ca.id and o.id=od.id_order and od.id_product=p.id and od.id_order = ? ");
@@ -93,7 +93,7 @@ public class OrderDetailDAO extends BaseDAO {
                     ProductDTO productDTO= ProductFactory.convertToDTO(rs);
                     productDTO.setFromDate(rs.getTimestamp("from_date"));
                     productDTO.setToDate(rs.getTimestamp("to_date"));
-                    result.put(productDTO.getId(), productDTO);
+                    result.add(productDTO);
                 }
                 return result;
             }

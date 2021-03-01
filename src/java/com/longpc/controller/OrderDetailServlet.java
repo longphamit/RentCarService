@@ -11,7 +11,9 @@ import com.longpc.dto.SearchProductDTO;
 import com.longpc.util.LinkConstant;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +33,7 @@ public class OrderDetailServlet extends HttpServlet {
         String id=request.getParameter("id");
         SearchProductDTO searchProductDTO= new SearchProductDTO();
         try{
-            LinkedHashMap<String,ProductDTO> listProduct=orderDetailDAO.findByIdOrder(id);
+            List<ProductDTO> listProduct=orderDetailDAO.findByIdOrder(id);
             request.setAttribute("listProducts", listProduct);
             url=LinkConstant.ORDER_DETAIL;
         }catch(Exception e){

@@ -54,11 +54,15 @@ public class OrderDAO extends BaseDAO {
                 cn.commit();
                 return true;
             }
-        } finally {
+        }catch(Exception e){
+            cn.rollback();
+            throw e;
+        }finally {
             DBUtil.closeConnection(cn, ps, rs);
         }
         return false;
     }
+    
     public List<OrderDTO> getAllOrder(SearchOrderDTO searchOrderDTO) throws Exception{
         List<OrderDTO> orderDTOs= new ArrayList<>();
         String sql="select o.id,o.total,o.sum,o.create_date,o.id_discount,o.status from tblOrders o, tblOrderDetail od,tblProducts p where od.id_order=o.id and p.id=od.id_product and o.status=1 and o.id_user="+"'"+searchOrderDTO.getIdUser()+"' ";
@@ -72,7 +76,9 @@ public class OrderDAO extends BaseDAO {
                 sql+=" and o.create_date = "+"'"+searchOrderDTO.getDate()+"'";
             }
         }
+        sql+=" group by o.id,o.total,o.sum,o.create_date,o.id_discount,o.status";
         sql+=" order by o.id DESC";
+        
         try{
             
             cn=DBUtil.makeConnection();

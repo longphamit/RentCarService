@@ -14,6 +14,9 @@ import com.longpc.util.DBUtil;
 public class DiscountDAO extends BaseDAO {
 
     public double checkDiscount(String id, String userId) throws Exception {
+        if(userId==null){
+            return -1;
+        }
         String sql = "select id_discount from tblOrders where id_user=? and id_discount=?";
         try {
             cn = DBUtil.makeConnection();

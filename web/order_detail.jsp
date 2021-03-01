@@ -39,6 +39,7 @@
 
     <body>
         <div class="container">
+            
             <table class="table">
                 <thead>
                     <tr>
@@ -56,20 +57,21 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${requestScope.listProducts}" var="item">
+                    
                         <tr>
                             <td>
-                                <img style="width: 300px;height: 200px"  src="${item.value.imageAddress}" class="card-img-top" alt="...">
+                                <img style="width: 300px;height: 200px"  src="${item.imageAddress}" class="card-img-top" alt="...">
                             </td>
-                            <td>${item.value.name}</td>
-                            <td>${item.value.carNumber}</td>
-                            <td>${item.value.yearProduct}</td>
-                            <td>${item.value.categoryDTO.name}</td>
-                            <td>${item.value.price} USD/day</td>
-                            <td><fmt:formatDate value="${item.value.fromDate}" pattern="dd-MM-yyyy HH:mm"></fmt:formatDate></td>
-                            <td><fmt:formatDate value="${item.value.toDate}" pattern="dd-MM-yyyy HH:mm"></fmt:formatDate></td>
+                            <td>${item.name}</td>
+                            <td>${item.carNumber}</td>
+                            <td>${item.yearProduct}</td>
+                            <td>${item.categoryDTO.name}</td>
+                            <td>${item.price} USD/day</td>
+                            <td><fmt:formatDate value="${item.fromDate}" pattern="dd-MM-yyyy HH:mm"></fmt:formatDate></td>
+                            <td><fmt:formatDate value="${item.toDate}" pattern="dd-MM-yyyy HH:mm"></fmt:formatDate></td>
                             <td>
                                 <form action="SendRating" method="POST">
-                                    <input type="hidden" name="id" value="${item.key}"/>
+                                    <input type="hidden" name="id" value="${item.id}"/>
                                     <input type="hidden" name="idOrder" value="${param.id}"/>
                                     <div>
                                         <div id="rating">

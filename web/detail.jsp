@@ -78,12 +78,12 @@
             <ul>
                 <c:forEach items="${requestScope.listComments}" var="comment">
                     <li class="list-group-item">
-                        <span class="badge badge-pill badge-primary">${comment.key}</span>
-                        <p>${comment.value}</p>
+                        <c:if test="${comment.value ne null}">
+                            <span class="badge badge-pill badge-primary">${comment.key}</span>
+                            <p>${comment.value}</p>
+                        </c:if>
                     </li>
                 </c:forEach>
-
-
             </ul>
         </div>
         <div class="modal fade" id="OrderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
