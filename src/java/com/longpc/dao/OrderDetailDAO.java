@@ -105,7 +105,11 @@ public class OrderDetailDAO extends BaseDAO {
     }
     public boolean checkOrderDetail(String id,String fromDate,String toDate) throws Exception{
         String sql="select od.id_product from tblOrderDetail od,tblOrders o "
-                + "where o.id=od.id_order and od.id_product=? and ((od.from_date >= ? and od.from_date <= ?) or (od.to_date >= ? and od.to_date <= ?) or (od.from_date <= ? and od.to_date >= ?) or (od.from_date>= ? and od.to_date<=?))";
+                + "where o.id=od.id_order and od.id_product=? "
+                + "and ((od.from_date >= ? and od.from_date <= ?) "
+                + "or (od.to_date >= ? and od.to_date <= ?) "
+                + "or (od.from_date <= ? and od.to_date >= ?) "
+                + "or (od.from_date>= ? and od.to_date<=?))";
         try{
             cn=DBUtil.makeConnection();
             ps=cn.prepareStatement(sql);
