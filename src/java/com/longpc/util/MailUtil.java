@@ -28,7 +28,7 @@ public class MailUtil {
 
     public static final String APP_EMAIL = "phamlong992k@gmail.com"; // your email
 
-    public static final String APP_PASSWORD = "Goboi123"; // your password
+    public static final String APP_PASSWORD = "*******"; // your password
     public static int MIN=100;
     public static int MAX=999;
      public static String TITLE="LongPC Rencar verify Code. Please enter that code to verify your email";
